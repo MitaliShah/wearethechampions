@@ -15,22 +15,30 @@ let textAreaforEndorsement = document.querySelector("#endorsement-text");
 let publishBtn = document.querySelector("#publish-btn");
 let allEndorsementsContainer = document.querySelector(".endorsements-container");
 
-publishBtn.addEventListener("click", function() {
+publishBtn.addEventListener("click", function() {    
     let valueFromTextArea = textAreaforEndorsement.value;
+    if(!valueFromTextArea){
+        alert("Please add Endorsement");
+        return;
+    }
     push(endorsementsInDB, valueFromTextArea);
-    clearTextAreaforEndorsement(); 
+    clearTextAreaforEndorsement();
 })
 
 onValue(endorsementsInDB, function(snapshot) {
-    let endorsementsArray = Object.entries(snapshot.val());
+    if(snapshot.exists()){
+        let endorsementsArray = Object.entries(snapshot.val());
 
-    clearEndorsementsContainer();
+        clearEndorsementsContainer();
 
-    for(let i = 0; i < endorsementsArray.length; i++){
-        let currentendorsement = endorsementsArray[i];
-        let currentEndorsementID = currentendorsement[0];
-        let currentEndorsementValue = currentendorsement[1]
-        appendEndorsementListToParagraph(currentEndorsementValue)
+        for(let i = 0; i < endorsementsArray.length; i++){
+            let currentendorsement = endorsementsArray[i];
+            let currentEndorsementID = currentendorsement[0];
+            let currentEndorsementValue = currentendorsement[1]
+            appendEndorsementListToParagraph(currentEndorsementID,currentEndorsementValue)
+        }
+    }    else {
+        allEndorsementsContainer.innerHTML = `No Endorsements yet.`;
     }
 })
 
@@ -42,8 +50,14 @@ function clearTextAreaforEndorsement() {
     textAreaforEndorsement.value = "";
 }
 
-function appendEndorsementListToParagraph(endorsement) {
+function appendEndorsementListToParagraph(id,value) {
     let newPara = document.createElement("p");
-    newPara.textContent = endorsement
+    newPara.textContent = value;
+
+    newPara.addEventListener("click", function() {
+        let exactLocationOfEndorsementToRemove = ref(database, `endorsements/${id}`);
+        remove(exactLocationOfEndorsementToRemove);
+    })
+
     allEndorsementsContainer.append(newPara);
 }

@@ -41,7 +41,9 @@ img {
 .endorsements-container{
     display: flex;
     flex-wrap: wrap;
+    flex-grow: 1;
     color: black;
+    background-color: #cbb4c5;
     gap: 10px;
 }
 
