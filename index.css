@@ -7,6 +7,7 @@ html, body {
     padding: 0;
     background-color: #1B1924;
     color: #fff;
+    font-family: 'Raleway', sans-serif;
     text-align: center;
 }
 
@@ -16,10 +17,17 @@ input {
     border: none;
 }
 
+header > h1 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+main {
+    margin: 40px 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-
     max-width: 320px;
     margin: 30px auto;
 }
@@ -35,20 +43,48 @@ img {
     flex-direction: column;
 }
 
+#endorsement-text {
+    margin-top: 10px;
+    height: 100px;
+    background: #444059;
+    border-radius: 4px;
+}
+
+#input-field-from, #input-field-to {
+    margin: 5px 0;
+    background: #444059;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center; 
+}
+
 #publish-btn {
     margin-top: 10px;
+    background: #28A9F1;
+    height: 50px;
+    border-radius: 4px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 22px;
 }
 .endorsements-container{
     display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
+    flex-wrap: wrap;    
     color: black;
-    background-color: #cbb4c5;
-    gap: 10px;
+    background-color: #cbb4c5;    
+    /* gap: 10px; */
+
+}
+
+.bottom-container > h2 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
 }
 
 .endorsements-container > p {
-    padding: 10px;
+    /* padding: 10px; */
     background-color: #FFFDF8;
     color: inherit;
+    margin: 5px;
+    width: 100%;
+    text-align: center;
 }
