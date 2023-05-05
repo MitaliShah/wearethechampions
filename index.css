@@ -38,3 +38,15 @@ img {
 #publish-btn {
     margin-top: 10px;
 }
+.endorsements-container{
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    gap: 10px;
+}
+
+.endorsements-container > p {
+    padding: 10px;
+    background-color: #FFFDF8;
+    color: inherit;
+}

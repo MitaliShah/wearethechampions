@@ -13,13 +13,37 @@ const endorsementsInDB = ref(database, "endorsements");
 
 let textAreaforEndorsement = document.querySelector("#endorsement-text");
 let publishBtn = document.querySelector("#publish-btn");
+let allEndorsementsContainer = document.querySelector(".endorsements-container");
 
 publishBtn.addEventListener("click", function() {
     let valueFromTextArea = textAreaforEndorsement.value;
     push(endorsementsInDB, valueFromTextArea);
-    clearTextAreaforEndorsement();
+    clearTextAreaforEndorsement(); 
 })
+
+onValue(endorsementsInDB, function(snapshot) {
+    let endorsementsArray = Object.entries(snapshot.val());
+
+    clearEndorsementsContainer();
+
+    for(let i = 0; i < endorsementsArray.length; i++){
+        let currentendorsement = endorsementsArray[i];
+        let currentEndorsementID = currentendorsement[0];
+        let currentEndorsementValue = currentendorsement[1]
+        appendEndorsementListToParagraph(currentEndorsementValue)
+    }
+})
+
+function clearEndorsementsContainer(){
+    allEndorsementsContainer.innerHTML = ``;
+}
 
 function clearTextAreaforEndorsement() {
     textAreaforEndorsement.value = "";
+}
+
+function appendEndorsementListToParagraph(endorsement) {
+    let newPara = document.createElement("p");
+    newPara.textContent = endorsement
+    allEndorsementsContainer.append(newPara);
 }
