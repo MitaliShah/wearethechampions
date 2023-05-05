@@ -70,7 +70,7 @@ img {
     display: flex;
     flex-wrap: wrap;    
     color: black;
-    background-color: #cbb4c5;    
+    /* background-color: #cbb4c5;     */
     /* gap: 10px; */
 
 }
@@ -81,10 +81,16 @@ img {
 }
 
 .endorsements-container > p {
-    /* padding: 10px; */
+    padding: 14px;
+    min-height: 50px;
     background-color: #FFFDF8;
     color: inherit;
-    margin: 5px;
+    /* margin: 5px; */
     width: 100%;
-    text-align: center;
+    text-align: left;
+    font-size: 14px;
+}
+
+.endorsements-container > p:first-child {
+    margin-top: 0;
 }
