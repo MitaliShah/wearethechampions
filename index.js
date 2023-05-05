@@ -16,5 +16,10 @@ let publishBtn = document.querySelector("#publish-btn");
 
 publishBtn.addEventListener("click", function() {
     let valueFromTextArea = textAreaforEndorsement.value;
-    console.log(valueFromTextArea);
+    push(endorsementsInDB, valueFromTextArea);
+    clearTextAreaforEndorsement();
 })
+
+function clearTextAreaforEndorsement() {
+    textAreaforEndorsement.value = "";
+}
