@@ -1,0 +1,30 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #1B1924;
+    color: #fff;
+    text-align: center;
+}
+
+button, 
+textarea,
+input {
+    border: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    margin: 30px auto;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+}
