@@ -14,33 +14,43 @@ const endorsementsInDB = ref(database, "endorsements");
 let textAreaforEndorsement = document.querySelector("#endorsement-text");
 let publishBtn = document.querySelector("#publish-btn");
 let allEndorsementsContainer = document.querySelector(".endorsements-container");
+let fromInput = document.querySelector("#input-field-from");
+let toInput = document.querySelector("#input-field-to");
 
 publishBtn.addEventListener("click", function() {    
     let valueFromTextArea = textAreaforEndorsement.value;
-    if(!valueFromTextArea){
-        alert("Please add Endorsement");
+    let valueFromInput = fromInput.value;
+    let valueToInput = toInput.value;
+
+    if(!valueFromTextArea || !valueFromInput || !valueToInput){
+        alert("Please add Endorsement, From and To");
         return;
     }
-    push(endorsementsInDB, valueFromTextArea);
+    push(endorsementsInDB, {valueFromTextArea, valueFromInput, valueToInput});
     clearTextAreaforEndorsement();
 })
+onValue(endorsementsInDB, handleValues);
 
-onValue(endorsementsInDB, function(snapshot) {
+function handleValues(snapshot) {
     if(snapshot.exists()){
+        // allEndorsementsContainer.innerHTML = ""
         let endorsementsArray = Object.entries(snapshot.val());
 
         clearEndorsementsContainer();
-
         for(let i = 0; i < endorsementsArray.length; i++){
             let currentendorsement = endorsementsArray[i];
+           
             let currentEndorsementID = currentendorsement[0];
-            let currentEndorsementValue = currentendorsement[1]
-            appendEndorsementListToParagraph(currentEndorsementID,currentEndorsementValue)
+            let currentEndorsementValue = currentendorsement[1];
+            //console.log(currentEndorsementID, currentEndorsementValue)
+            const { valueFromTextArea, valueFromInput, valueToInput } = currentEndorsementValue
+            console.log(valueFromTextArea, valueFromInput, valueToInput)
+            appendEndorsementListToParagraph(currentEndorsementID,valueFromTextArea, valueFromInput, valueToInput)
         }
     }    else {
         allEndorsementsContainer.innerHTML = `No Endorsements yet.`;
-    }
-})
+}
+}
 
 function clearEndorsementsContainer(){
     allEndorsementsContainer.innerHTML = ``;
@@ -48,13 +58,20 @@ function clearEndorsementsContainer(){
 
 function clearTextAreaforEndorsement() {
     textAreaforEndorsement.value = "";
+    fromInput.value = "";
+    toInput.value = "";
 }
 
-function appendEndorsementListToParagraph(id,value) {
+function appendEndorsementListToParagraph(id,valueFromTextArea, valueFromInput, valueToInput) {
     let newPara = document.createElement("p");
-    newPara.textContent = value;
+    //newPara.textContent = value;
+    newPara.innerHTML = `<h2>From: ${valueFromInput}</h2> <br>
+    ${valueFromTextArea} <br>
+    To: <h2>${valueToInput}</h2>
 
-    newPara.addEventListener("click", function() {
+    `
+
+    newPara.addEventListener("dblclick", function() {
         let exactLocationOfEndorsementToRemove = ref(database, `endorsements/${id}`);
         remove(exactLocationOfEndorsementToRemove);
     })
