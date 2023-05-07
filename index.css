@@ -21,6 +21,10 @@ header > h1 {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+h6, p {
+    margin: 0;
+}
+
 main {
     margin: 40px 0;
 }
@@ -70,9 +74,6 @@ img {
     display: flex;
     flex-wrap: wrap;    
     color: black;
-    /* background-color: #cbb4c5;     */
-    /* gap: 10px; */
-
 }
 
 .bottom-container > h2 {
@@ -80,17 +81,31 @@ img {
     font-size: 20px;
 }
 
-.endorsements-container > p {
-    padding: 14px;
-    min-height: 50px;
+.endorsements-container > section {
+    padding: 10px;
     background-color: #FFFDF8;
-    color: inherit;
-    /* margin: 5px; */
+    color: inherit;    
     width: 100%;
-    text-align: left;
-    font-size: 14px;
+    text-align: left;    
 }
 
 .endorsements-container > p:first-child {
     margin-top: 0;
+}
+
+.endorsements-container p{
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.endorsements-container h6{
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Josefin Sans', sans-serif;    
+}
+
+.endorsements-container > section {
+    margin-bottom: 10px;
 }
