@@ -35,17 +35,16 @@ onValue(endorsementsInDB, handleValues);
 function handleValues(snapshot) {
     if(snapshot.exists()){
         allEndorsementsContainer.innerHTML = ""
-        let endorsementsArray = Object.entries(snapshot.val());
+        let endorsementsArray = Object.entries(snapshot.val()).reverse();
 
         clearEndorsementsContainer();
         for(let i = 0; i < endorsementsArray.length; i++){
-            let currentendorsement = endorsementsArray[i];
-           
+            let currentendorsement = endorsementsArray[i];           
             let currentEndorsementID = currentendorsement[0];
             let currentEndorsementValue = currentendorsement[1];
-            //console.log(currentEndorsementID, currentEndorsementValue)
-            const { valueFromTextArea, valueFromInput, valueToInput } = currentEndorsementValue
-            console.log(valueFromTextArea, valueFromInput, valueToInput)
+
+            const { valueFromTextArea, valueFromInput, valueToInput } = currentEndorsementValue;
+
             appendEndorsementListToParagraph(currentEndorsementID,valueFromTextArea, valueFromInput, valueToInput)
         }
     }    else {
@@ -69,7 +68,7 @@ function appendEndorsementListToParagraph(id,valueFromTextArea, valueFromInput, 
     newPara.innerHTML = `        
         <h6>From: ${valueFromInput}</h6>
         <p>${valueFromTextArea}</p>
-        <h6>To:${valueToInput}</h6>
+        <h6>To: ${valueToInput}</h6>
     `
     newPara.addEventListener("dblclick", function() {
         let exactLocationOfEndorsementToRemove = ref(database, `endorsements/${id}`);
