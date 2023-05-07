@@ -5,18 +5,19 @@ import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com
 const appSettings = {
     databaseURL: "https://wearethechampions-9c220-default-rtdb.firebaseio.com/"
 }
-
+// Firebase initial setup
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementsInDB = ref(database, "endorsements");
 
-
+// Getting the values from elements
 let textAreaforEndorsement = document.querySelector("#endorsement-text");
 let publishBtn = document.querySelector("#publish-btn");
 let allEndorsementsContainer = document.querySelector(".endorsements-container");
 let fromInput = document.querySelector("#input-field-from");
 let toInput = document.querySelector("#input-field-to");
 
+// Event listener that would check if the input values exisits and if they do it would push the data to the database using the push method.
 publishBtn.addEventListener("click", function() {
     let valueFromTextArea = textAreaforEndorsement.value;
     let valueFromInput = fromInput.value;
@@ -30,11 +31,14 @@ publishBtn.addEventListener("click", function() {
 
     clearTextAreaforEndorsement();
 })
+
+// onValue event Will trigger once with the initial data and each time the data changes.
 onValue(endorsementsInDB, handleValues);
 
+// 
 function handleValues(snapshot) {
     if(snapshot.exists()){
-        allEndorsementsContainer.innerHTML = ""
+        allEndorsementsContainer.innerHTML = "";
         let endorsementsArray = Object.entries(snapshot.val()).reverse();
 
         clearEndorsementsContainer();

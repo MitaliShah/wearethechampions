@@ -4,5 +4,5 @@ Quick start:
 
 ```
 $ npm install
-$ npm start
+$ npm run start
 ````
